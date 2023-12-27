@@ -2,6 +2,7 @@ import { useState } from 'react'
 import data from '../../data.json'
 import UserReply from './UserReply'
 import CurrentUser from './CurrentUser'
+import Modal from './Modal'
 import '../index.css'
 
 const Comments = () => {
@@ -10,8 +11,10 @@ const Comments = () => {
   const [score, setScore] = useState(comments.map((comment) => comment.score))
   const [repliesScore, setRepliesScore] = useState(comments.flatMap((comment) => comment.replies.map((reply) =>
   reply.score)))
- 
-  const [replies, setReplies] = useState([])
+  const [commentModal, setCommentModal] = useState(false)
+  
+
+  // const [replies, setReplies] = useState([])
 
   const handleScore = (id, value) => {
 
@@ -70,12 +73,21 @@ const Comments = () => {
                     </div>
                 </div>
                 <div className="under">
-                  <UserReply replies={comment.replies} comment={comment} handleScore={handleScore} checkScore={checkScore} repliesScore={repliesScore}/> 
+                  <UserReply replies={comment.replies} 
+                            comment={comment} 
+                            handleScore={handleScore} 
+                            checkScore={checkScore} 
+                            repliesScore={repliesScore} 
+                            setModal={setCommentModal} 
+                            modal={commentModal}/> 
                 </div>
-                {}
+                
             </>  
         )
       })}
+      {commentModal && <Modal
+                        setModal={setCommentModal} />}
+
       <CurrentUser data={data}/>
     </main>
   )

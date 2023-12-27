@@ -1,8 +1,10 @@
 import '../index.css'
 import { useState } from 'react'
+import Modal from './Modal'
 
-const UserReply = ( {replies, handleScore, checkScore, repliesScore} ) => {
+const UserReply = ( {replies, handleScore, checkScore, repliesScore, setModal, modal} ) => {
 
+  
 
   return (
     <>
@@ -23,7 +25,7 @@ const UserReply = ( {replies, handleScore, checkScore, repliesScore} ) => {
                   { reply.id == 4 && <p className="you">you</p>}
                   <p className="creation-date">{reply.createdAt}</p>
                 </div>
-                { reply.id == 4 ? <><button className="reply btn delete"><img src="../../images/icon-delete.svg" /> Delete </button><button className="reply btn edit"><img src="../../images/icon-edit.svg" /> Edit </button></> : <button className="reply btn"><img src="../../images/icon-reply.svg" alt="reply" /> Reply </button>}
+                { reply.id == 4 ? <><button className="reply btn delete" onClick={() => setModal(!modal)}><img src="../../images/icon-delete.svg" /> Delete </button><button className="reply btn edit"><img src="../../images/icon-edit.svg" /> Edit </button></> : <button className="reply btn"><img src="../../images/icon-reply.svg" alt="reply" /> Reply </button>}
               </div>
               <p className="user-content"><span className="replying-to">@{reply.replyingTo}</span> {reply.content}</p>
             </div>
